@@ -1,5 +1,9 @@
 server:
   port: 8080
+  
+logging:
+  level:
+    root: DEBUG
 
 spring:
   application:
@@ -10,10 +14,14 @@ spring:
 
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+      routes:
+        - id: product-service
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+          
 
 eureka:
   client:
