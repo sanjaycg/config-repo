@@ -9,3 +9,5 @@ spring:
           uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/product-service/**
+          filters:
+            - StripPrefix=1   # 🔥 IMPORTANT
